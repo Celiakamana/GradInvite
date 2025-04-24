@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PartyInfo</title>
+  <style>
+    body {
+      height:100vh;
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #272727;
+      color: #c74772;
+      line-height: 1.6;
+    }
+
+  
+    .container {
+      max-width: 450px;
+      margin: auto;
+      background-color: rgb(218, 218, 218);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    main {
+      flex: 1;
+      padding-top: 120px;
+      padding-bottom: 40px;
+    }
+
+    h1, h2 {
+      text-align: center;
+      color: #c74772;
+    }
+    h3{
+      margin-bottom: 0px;
+    }
+
+    .addresses {
+      margin-bottom: 30px;
+    }
+
+    .addresses p {
+      margin: 8px 0;
+      color:#1e1e1e;
+    }
+
+    .addresses a{
+      color:#1e1e1e;
+    }
+
+
+    label {
+      display: block;
+      margin: 12px 0 4px;
+      font-weight: bold;
+    }
+
+    input[type="text"], textarea, select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #9b9a9a;
+    }
+
+    button {
+      margin-top: 20px;
+      background-color: #c74772;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #a63e5f;
+    }
+
+     /* nav */
+     header {
+      position: fixed;
+      top: 0px;
+      left: 0;
+      right: 0;
+      background-color: #272727;
+      z-index: 5;
+      display: flex;
+      height: 90px;
+    }
+
+    .back-btn {
+      position: fixed;
+      top: 0px;
+      margin-top: 0;
+      left:0;
+      right:0;
+      background-color: #c74772;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: none;
+      z-index: 4;
+    }
+
+    .burger {
+      position: fixed;
+      top: 30px;
+      right: 50%;
+      background-color: #c74772;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 50px;
+      z-index: 3;
+    }
+
+    .menu {
+      position: fixed;
+      top: 75px;
+      right: 50%;
+      background-color: #1e1e1e;
+      border: 2px solid #b67c8f;
+      border-radius: 10px;
+      padding: 10px;
+      display: none;
+      flex-direction: column;
+      z-index: 2;
+      transition: opacity 0.3s ease, top 0.3s ease;
+    }
+
+    .menu a {
+      color: white;
+      text-decoration: none;
+      margin: 5px 0;
+      display: block;
+      font-size: 0.9rem;
+    }
+    .menu a:hover {
+      color: #b67c8f;
+    }
+
+    footer {
+			background: #1e1e1e;
+			color: #fff;
+			text-align: center;
+      width:100%;
+		}
+    footer p {
+    margin: 4px 0; 
+    font-size: 0.85rem; 
+    }
+
+    @media (max-width: 600px) {
+
+      button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+      <!-- Burger Menu -->
+      <button class="burger" onclick="toggleMenu()">☰</button>
+         
+      <div class="menu" id="menu">
+        <a href="index.html">🏠 Home</a>
+        <a href="journey.html">Undergrad Journey</a>
+        <a href="mystery.html">Mystery Page</a>
+      </div>
+ 
+      <!-- Back Button -->
+      <button class="back-btn" id="backBtn" onclick="goBack()">⬅ Back</button>
+  </header>
+  <main>
+    <div class="container">
+      <h1>Party Time🎓🎉</h1>
+      
+      <div class="addresses">
+        <h2>Addresses</h2>
+        <h3>Graduation Ceremony:</h3>
+        <p>May 3rd 2025, starts at 4PM<br>
+        <strong>Elliot Hall of Music at Purdue University</strong>,<br>
+        <a href="https://www.google.com/maps?q=Elliot+Hall+of+Music+at+Purdue+University,+712+3rd+St,+West+Lafayette,+IN+47907" target="_blank" rel="noopener noreferrer">
+          712 3rd St, West Lafayette, IN 47907
+        </a><br>
+        </p>
+
+        <h3>Banquet Dinner:</h3>
+        <p>
+          May 3rd 2025 At 7PM<br>
+          <strong>45 Degrees</strong><br>
+          <a href="https://www.google.com/maps?q=45+Degrees+Indianapolis+IN" target="_blank" rel="noopener noreferrer">
+            765 Massachusetts Ave, Indianapolis, IN 46204
+          </a><br>
+        </p>
+      </div>
+  
+      <h2>RSVP</h2>
+      <form action="https://formspree.io/f/xldbeoyr" method="POST">
+        <label for="name">Your Name</label>
+        <input type="text" id="name" name="name" required />
+  
+        <label for="attendance">Will you attend?</label>
+        <select id="attendance" name="attendance" required>
+          <option value="">-- Please choose one --</option>
+          <option value="Yes, I will be there">Yes, I will be there :)</option>
+          <option value="No, Can't make it">No, Can't make it :(</option>
+        </select>
+  
+        <label for="allergies">Do you have any food allergies?</label>
+        <textarea id="allergies" name="allergies" rows="3" placeholder="Optional..."></textarea>
+  
+        <button type="submit">Submit RSVP</button>
+      </form>
+    </div>
+  </main>
+  <footer>
+    <p>&copy; 2025 celiakamana.com | All rights reserved.</p>
+  </footer>
+  
+  <script>
+     window.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("backBtn").style.display = "block";
+   });
+
+    function goBack() {
+      window.history.back(); // Go back to previous page 
+    }
+
+    function toggleMenu() {
+      const menu = document.getElementById("menu");
+      menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+    }
+
+    window.addEventListener("scroll", () => {
+    const header = document.querySelector("header");
+    if (window.scrollY > 10) {
+      header.style.backgroundColor = "#1e1e1e"; // darker
+    } else {
+      header.style.backgroundColor = "#272727"; // default
+    }
+     
+    if (menu.style.display === "flex") {
+      menu.style.display = "none";
+    }
+   });
+  </script>
+</body>
+</html>

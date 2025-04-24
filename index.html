@@ -2,98 +2,117 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Celia's Graduation Invite</title>
+    <title>Graduation Invitation</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        * {
-            box-sizing: border-box;
-        }
 
+        html, body {
+        height: 100%;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        }
+        
         body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #272727;
-            color: #b67c8f;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            text-align: center;
-            padding: 5%;
-            
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #272727;
+        color: #b67c8f;
+        text-align: center;
         }
-        h1,h2{
-          margin:0;
-          padding:0;
+        main {
+        flex: 1;
         }
-
 
         h1 {
-            font-size: 1.2rem;
-            color: #c74772;
-            margin-bottom: 25px;
-        }
-        h2 {
-            font-size: 0.8rem;
-            color: #b67c8f;
+        font-size: 1.2rem;
+        color: #c74772;
+        margin-bottom: 25px;
+        margin-top: 30px;
         }
 
+        h2 {
+        font-size: 0.8rem;
+        color: #b67c8f;
+        }
+
+        h3 {
+        font-size: 1.2rem;
+        color: #c74772;
+        margin-bottom: 25px;
+        }
+
+
         img {
-            max-width: 50%;
-            height: auto;
-            border-radius: 10px;
-            margin-bottom: 15px;
+        max-width: 50%;
+        height: auto;
+        border-radius: 10px;
+        margin-bottom: 15px;
         }
 
         .nav-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            width: 100%;
-            max-width: 300px;
+        display: flex;
+        flex-direction: column; 
+        gap: 15px;
+        width: 100%;
+        max-width: 300px;
+        margin:0 auto;
         }
 
         .nav-buttons a {
-            text-decoration: none;
-            background-color: #b67c8f;
-            color: #ffffff;
-            font-weight:bolder;
-            padding: 12px 20px;
-            border-radius: 6px;
-            font-size: 1.1rem;
-            transition: background-color 0.3s;
+        text-decoration: none;
+        background-color: #b67c8f;
+        color: #ffffff;
+        font-weight:bolder;
+        padding: 12px 20px;
+        border-radius: 6px;
+        font-size: 1.1rem;
+        transition: background-color 0.3s;
         }
 
         .nav-buttons a:hover {
-            background-color: #b82d5c;
+        background-color: #b82d5c;
         }
 
+        footer {
+			background: #1e1e1e;
+			color: #fff;
+			text-align: center;
+            width:100%;
+		}
+        footer p {
+        margin: 4px 0; 
+        font-size: 0.85rem; 
+        }
+
+
         @media (min-width: 600px) {
-            h1 {
-                font-size: 1.5em;
-            }
-            h2{
-              font-size: 1rem;
-            }
-            img {
-            max-width: 65%;
-            }
+        h1,h3 {
+            font-size: 1.5em;
+        }
+        h2{
+            font-size: 1rem;
+        }
+        img {
+        max-width: 65%;
+        }
         }
     </style>
 </head>
 <body>
-    <h1>Howdy fellow earthlings,</h1>
-    <h2>I’m graduating with My Bachelor's in Information Technology... <h2>
-    <img src="C:\Users\kaman\OneDrive\Desktop\Gradsite\img\itsdone.gif" alt="Graduation Celebration GIF">
-    <h1>I would love for you to come celebrate my undergrad graduation with me🎓🎉</h1><br>
-
-    <div class="nav-buttons">
-        <a href="party.html">🎉 Party Info/RSVP</a>
-        <a href="journey.html">🎓 UnderGrad Journey</a>
-        <a href="mystery.html">🕵 Mystery Page</a>
-    </div>
-
+    <main>
+        <h1>Howdy,</h1>
+        <h2>I’m graduating with My Bachelor's in Information Technology... </h2>
+        <img src="C:\Users\kaman\OneDrive\Desktop\Gradsite\img\itsdone.gif" alt="Graduation Celebration GIF"/> 
+        <h3>I would love for you to come celebrate my undergrad graduation with me🎓🎉</h3><br>
+        
+        <div class="nav-buttons">
+            <a href="party.html">🎉 Party Info/RSVP</a>
+            <a href="journey.html">🎓 UnderGrad Journey</a>
+            <a href="mystery.html">🔒 Mystery Page</a>
+        </div>
+    </main> 
+    <footer>
+        <p>&copy; 2025 celiakamana.com | All rights reserved.</p>
+    </footer>
 </body>
 </html>

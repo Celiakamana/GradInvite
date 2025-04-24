@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Undergrad Journey</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      margin: 0;
+      background-color: #b67c8f;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #ffffff;
+      background-color: #272727;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      padding: 40px 20px;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    .introBlock {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    .introText {
+      font-style: italic;
+      line-height: 1.6;
+      font-size: 1.1rem;
+      color: #ffffff;
+      margin-bottom: 30px;
+    }
+
+    h1{
+      color: #c74772;
+      margin-bottom: 10px;
+      display: none
+    }
+
+    main{
+      margin-top: 30px;
+    }
+    
+    .terminal {
+      background-color: #1e1e1e;
+      border: 2px solid #b67c8f;
+      border-radius: 10px;
+      padding: 20px;
+      height: 250px;
+      text-align: left;
+      overflow-y: auto;
+      margin-bottom: 20px;
+      display: none;
+    }
+
+    .choices {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    button {
+      background-color: #c74772;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 0.95rem;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #b63765;
+    }
+    button.clicked {
+      background-color: #b67c8f;
+      cursor: default;
+      opacity: 0.8;
+    }
+
+    /* nav */
+    header {
+      position: fixed;
+      top: 0px;
+      left: 0;
+      right: 0;
+      background-color: #272727;
+      z-index: 5;
+      display: flex;
+      height: 90px;
+    }
+
+    .back-btn {
+      position: fixed;
+      top: 0px;
+      left:0;
+      right:0;
+      background-color: #c74772;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: none;
+      z-index: 4;
+    }
+
+    .burger {
+      position: fixed;
+      top: 50px;
+      right: 50%;
+      background-color: #c74772;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 50px;
+      z-index: 3;
+    }
+
+    .menu {
+      position: fixed;
+      top: 75px;
+      right: 50%;
+      background-color: #1e1e1e;
+      border: 2px solid #b67c8f;
+      border-radius: 10px;
+      padding: 10px;
+      display: none;
+      flex-direction: column;
+      z-index: 2;
+      transition: opacity 0.3s ease, top 0.3s ease;
+    }
+
+    .menu a {
+      color: white;
+      text-decoration: none;
+      margin: 5px 0;
+      display: block;
+      font-size: 0.9rem;
+    }
+    .menu a:hover {
+      color: #b67c8f;
+    }
+    
+    #recapOverlay {
+      position: fixed;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.95);
+      color: white;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+      text-align: center;
+      padding: 20px;
+    }
+
+    #recapOverlay video, #recapOverlay img {
+      max-width: 90%;
+      max-height: 70vh;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    #skipButton {
+      background: white;
+      color: #272727;
+      font-weight: bold;
+      padding: 10px 20px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+    }
+
+    footer {
+			background: #1e1e1e;
+			color: #fff;
+			text-align: center;
+      width:100%;
+		}
+    footer p {
+    margin: 4px 0; 
+    font-size: 0.85rem; 
+    }
+
+    @media (max-width: 600px) {
+      .choices {
+        flex-direction: column;
+      }
+
+      button {
+        width: 100%;
+      }
+    }
+   </style>
+</head>
+<body>
+   <header>
+     <!-- Burger Menu -->
+     <button class="burger" onclick="toggleMenu()">☰</button>
+        
+     <div class="menu" id="menu">
+       
+       <a href="index.html">🏠 Home</a>
+       <a href="party.html">Party Info/RSVP</a>
+       <a href="mystery.html">Mystery Page</a>
+       <a href="#" onclick="resetStory()">Reset Journey</a>
+      </div>
+
+     <!-- Back Button -->
+     <button class="back-btn" id="backBtn" onclick="goBack()">⬅ Back</button>
+   </header>
+   
+   <main>
+     <div class="container">
+      <!-- INTRO ONLY -->
+      <div class="introBlock" id="introBlock">
+        <div class="introText">
+          A wise woman raised me on the principle of <strong>"You can do anything."</strong><br>
+          This bachelor taught me that each function unlocks the next.<br>
+          Don’t forget to <code>tryAgain()</code> when <code>fail()</code>.<br>
+          Let me take you on my undergrad journey...
+        </div>
+       <button onclick="startJourney()">Start()</button>
+      </div>
+      <!-- chapters -->
+      <h1 id="chapter1Header">Chapter 1: Just a Girl in a Big World</h1>
+      <div class="terminal" id="terminal1"></div>
+      <div class="choices" id="choices1"></div>
+
+      <h1 id="chapter2Header">Chapter 2: Just a Girl with Big Dreams</h1>
+      <div class="terminal" id="terminal2"></div>
+      <div class="choices" id="choices2"></div>
+
+      <h1 id="chapter3Header">Chapter 3: Hacked</h1>
+      <div class="terminal" id="terminal3"></div>
+      <div class="choices" id="choices3"></div>
+
+      <h1 id="chapter4Header">Chapter 4: End of the Tunnel</h1>
+      <div class="terminal" id="terminal4"></div>
+      <div class="choices" id="choices4"></div>
+
+     <!-- Recap -->
+     <div id="recapOverlay">
+      <video autoplay muted id="recapVideo" ></video>
+      <button id="skipButton" onclick="endRecap()">Skip Recap ▶</button>
+     </div>
+
+   </main>
+   <footer>
+      <p>&copy; 2025 celiakamana.com | All rights reserved.</p>
+   </footer>
+   <script>
+
+    //start of story after start btn is clicked
+    
+    let currentChapter = 1;
+    const usedButtons = new Set();
+    const chapterProgress = { 1: [], 2: [], 3: [], 4: [] };
+
+    const chapterIntro = {
+      1: ["> bootSequence(\"newbie\")", "> \"You will never be anything in this country without me...\""],
+      2: ["> bootSequence(\"Second Beginning\")", "> New state, new program..."],
+      3: ["> bootSequence(\"Navigating IT\")", "> New major, nothing's easier..."],
+      4: ["> bootSequence(\"Final Chapter\")", "> Blessings at every corner..."],
+      finale: ["My story is far from done...", "This is nothing but the first leg!"]
+    };
+
+    function startJourney() {
+      document.getElementById("introBlock").style.display = "none";
+      startChapter(1);
+    }
+
+    function log(text) {
+      const terminal = document.getElementById(`terminal${currentChapter}`);
+      const p = document.createElement("div");
+      p.textContent = text;
+      terminal.appendChild(p);
+      terminal.scrollTop = terminal.scrollHeight;
+    }
+
+    function startChapter(chapterNum) {
+      currentChapter = chapterNum;
+      for (let i = 1; i <= 4; i++) {
+        document.getElementById(`chapter${i}Header`).style.display = "none";
+        document.getElementById(`terminal${i}`).style.display = "none";
+        document.getElementById(`choices${i}`).innerHTML = "";
+      }
+
+      document.getElementById(`chapter${chapterNum}Header`).style.display = "block";
+      const terminal = document.getElementById(`terminal${chapterNum}`);
+      terminal.style.display = "block";
+      terminal.innerHTML = "";
+      chapterIntro[chapterNum].forEach(log);
+      renderChapter(chapterNum);
+    }
+
+    function clearCommentary() {
+      const terminal = document.getElementById(`terminal${currentChapter}`);
+      const lines = Array.from(terminal.querySelectorAll("div"));
+      for (let i = lines.length - 1; i >= 0; i--) {
+        if (!lines[i].textContent.startsWith(">")) {
+          lines[i].remove();
+        } else {
+          break;
+        }
+      }
+    }
+
+    function showChoices(buttons) {
+      const choicesDiv = document.getElementById(`choices${currentChapter}`);
+      choicesDiv.innerHTML = "";
+
+      buttons.forEach(btn => {
+        const b = document.createElement("button");
+        b.textContent = btn.label;
+        const isTryAgain = btn.label.toLowerCase().includes("tryagain");
+
+        if (!isTryAgain && usedButtons.has(btn.label)) {
+          b.disabled = true;
+          b.classList.add("clicked");
+        }
+
+        b.onclick = () => {
+          if (!usedButtons.has(btn.label) || isTryAgain) {
+            if (!isTryAgain) {
+              usedButtons.add(btn.label);
+              chapterProgress[currentChapter].push(btn.label);
+            }
+            clearCommentary();
+            log(`> ${btn.label}`);
+            b.disabled = true;
+            b.classList.add("clicked");
+            btn.handler();
+          }
+          document.getElementById("menu").style.display = "none";
+        };
+        choicesDiv.appendChild(b);
+      });
+    }
+
+    const recapVideos = {
+      1: "recap1.mp4",
+      2: "recap2.mp4",
+      3: "recap3.mp4",
+      4: "recap4.mp4"
+    };
+
+    function showRecap() {
+      const video = document.getElementById("recapVideo");
+      const overlay = document.getElementById("recapOverlay");
+      const skipBtn = document.getElementById("skipButton");
+
+      video.src = recapVideos[currentChapter];
+      overlay.style.display = "block";
+      skipBtn.style.display = "block";
+
+      setTimeout(() => {skipBtn.style.display = "block"}, 3000);
+    }
+
+    function endRecap() {
+      document.getElementById("recapOverlay").style.display = "none";
+      document.getElementById("skipButton").style.display = "none";
+
+      if (currentChapter < 4) {
+        log("> ontotheNextChapter()");
+        showChoices([
+          { label: `▶ Continue to Chapter ${currentChapter + 1}`, 
+            handler: () => startChapter(currentChapter + 1) 
+          }
+        ]);
+      } 
+      else 
+      {
+        //finale
+        const terminal = document.getElementById(`terminal${currentChapter}`);
+        const choicesDiv = document.getElementById(`choices${currentChapter}`);
+
+        terminal.style.display = "block";
+        terminal.innerHTML = "";
+        choicesDiv.innerHTML = "";
+        chapter4Header.innerHTML="";
+
+        chapterIntro.finale.forEach(line => {
+          const p = document.createElement("div");
+          p.textContent = line;
+          p.style.textAlign = "center";
+          p.style.fontSize = "1.3rem";
+          p.style.fontWeight = "bold";
+          p.style.margin = "10px 0";
+          p.style.color = "#ffc0cb"; 
+          p.style.textShadow = "0 0 10px #c74772"; 
+          terminal.appendChild(p);
+        });
+        terminal.scrollTop = terminal.scrollHeight;
+
+        
+        const resetBtn = document.createElement("button");
+        resetBtn.textContent = "Reset Journey";
+        resetBtn.onclick = resetStory;
+        choicesDiv.appendChild(resetBtn);
+
+        const homeBtn = document.createElement("button");
+        homeBtn.textContent = "Back to Home Page";
+        homeBtn.onclick = () => window.location.href = "index.html";
+        choicesDiv.appendChild(homeBtn);
+      }
+    }
+
+    //Chapters
+    function renderChapter(chapterNum) {
+    if (chapterNum === 1) {
+       // Initial path
+       showChoices([
+          { label: "believeThisStatement()", handler: () => believeThisStatement()},
+          { label: "defyThisStatement()", handler: () => defyThisStatement()}
+        ]);
+
+      //chapter choices progress
+      const history = chapterProgress[1];
+
+      function believeThisStatement() {
+          log("⌄ ");
+          log("Internalized doubt.");
+          showChoices([
+            { label: "tryAgain()", handler: backToStart }
+          ]);
+      }
+
+      function backToStart() {
+        clearCommentary();
+        showChoices([
+          { label: "believeThisStatement()", handler: believeThisStatement, disabled: true },
+          { label: "defyThisStatement()", handler: defyThisStatement }
+        ]);
+      }
+
+      function defyThisStatement() {
+          log("⌄ ");
+          log("You chose to rise.");
+          showChoices([
+            { label: "maybeGiveUp()", handler: maybeGiveUp },
+            { label: "doItAnyway()", handler: doItAnyway }
+          ]);
+        }
+
+      function maybeGiveUp() {
+          clearCommentary();
+          log("⌄ ");
+          log("Almost gave up...");
+          showChoices([
+            { label: "tryAgain()", handler: tryAgainAfterMaybe }
+          ]);
+      }
+
+      function tryAgainAfterMaybe() {
+          clearCommentary();
+          showChoices([
+            { label: "maybeGiveUp()", handler: maybeGiveUp, disabled: true },
+            { label: "doItAnyway()", handler: doItAnyway }
+          ]);
+      }
+
+      function doItAnyway() {
+          clearCommentary();
+          log("⌄ ");
+          log("You kept going.");
+          setTimeout (() => {
+            showRecap();
+          }, 3000)  
+      }
+     
+    }
+
+    if (chapterNum === 2) {
+       // Initial path
+       showChoices([
+          { label: "FindPlaceFirst()", handler: () => FindPlaceFirst()},
+          { label: "justWingIt()", handler: ()=> justWingIt()}
+        ]);
+
+      //chapter choices progress
+      const history = chapterProgress[2];
+
+      function FindPlaceFirst() {
+          log("⌄ ");
+          log("Didnt do that.. doubt.");
+          showChoices([
+            { label: "tryAgain()", handler: backToStart2 }
+          ]);
+      }
+
+      function backToStart2() {
+        clearCommentary();
+        showChoices([
+          { label: "FindPlaceFirst()", handler: FindPlaceFirst, disabled: true },
+          { label: "justWingIt()", handler: justWingIt }
+        ]);
+      }
+
+      function justWingIt() {
+          log("⌄ ");
+          log("Thats right...");
+          showChoices([
+            { label: "quitUniversity()", handler: quitUniversity },
+            { label: "switchToIt()", handler: switchToIt }
+          ]);
+        }
+
+      function quitUniversity() {
+          clearCommentary();
+          log("⌄ ");
+          log("Almost gave up Again...");
+          showChoices([
+            { label: "tryAgain()", handler: tryAgainAfterQuitThoughts2 }
+          ]);
+      }
+
+      function tryAgainAfterQuitThoughts2() {
+          clearCommentary();
+          showChoices([
+            { label: "quitUniversity()", handler: quitUniversity, disabled: true },
+            { label: "switchToIt", handler: switchToIt }
+          ]);
+      }
+
+      function switchToIt() {
+          clearCommentary();
+          log("⌄ ");
+          log("You kept going.");
+          setTimeout (() => {
+            showRecap();
+          }, 3000)
+      }
+        
+    }
+
+    if (chapterNum === 3) {
+      // Initial path
+      showChoices([
+        {label: "procrastinate()", handler: ()=> procrastinate()},
+
+        { label: "lockIn()", handler: ()=> lockIn()}
+      ]);
+
+      //chapter choices progress
+      const history = chapterProgress[3];
+
+      function procrastinate() {
+          log("⌄ ");
+          log("Did do that.. yep.");
+          showChoices([
+            { label: "tryAgain()", handler: backToStart3 }
+          ]);
+      }
+
+      function backToStart3() {
+        clearCommentary();
+        showChoices([
+          { label: "procrastinate()", handler: procrastinate, disabled: true },
+          { label: "lockIn()", handler: lockIn }
+        ]);
+      }
+
+      function lockIn() {
+          log("⌄ ");
+          log("Thats right...");
+          showChoices([
+          { label: "thoughtsOFQuitting()", handler: thoughtsOFQuitting },
+          { label: "keepAtIt()", handler: keepAtIt },
+          ]);
+        }
+
+      function thoughtsOFQuitting() {
+          clearCommentary();
+          log("⌄ ");
+          log("Almost gave up Again...");
+          showChoices([
+            { label: "tryAgain()", handler: tryAgainAfterQuitThoughts3 }
+          ]);
+      }
+
+      function tryAgainAfterQuitThoughts3() {
+          clearCommentary();
+          showChoices([
+          { label: "thoughtsOFQuitting()", handler: thoughtsOFQuitting, disabled:true},
+          { label: "keepAtIt()", handler: keepAtIt },
+          ]);
+      }
+
+      function keepAtIt() {
+          clearCommentary();
+          log("⌄ ");
+          log("You kept going.");
+          setTimeout (() => {
+            showRecap();
+          }, 3000)
+         
+      }
+
+    }
+
+    if (chapterNum === 4) {
+      // Initial path
+      showChoices([
+        {label: "becomeHopeless()", handler: ()=> becomeHopeless()},
+        { label: "beleieveInGodsPlan()", handler: ()=> beleieveInGodsPlan()}
+      ]);
+
+      //chapter choices progress
+      const history = chapterProgress[4];
+
+      function becomeHopeless() {
+          log("⌄ ");
+          log("Did do that.. yep.");
+          showChoices([
+            { label: "tryAgain()", handler: backToStart4 }
+          ]);
+      }
+
+      function backToStart4() {
+        clearCommentary();
+        showChoices([
+          { label: "becomeHopeless()", handler:becomeHopeless, disabled: true },
+          { label: "beleieveInGodsPlan()", handler: beleieveInGodsPlan }
+        ]);
+      }
+
+      function beleieveInGodsPlan() {
+          log("⌄ ");
+          log("Thats right...");
+          showChoices([
+          { label: "procrastinate()", handler: procrastinateChapt4 },
+          { label: "workingWithPurpose()", handler: workingWithPurpose },
+          ]);
+        }
+
+      function procrastinateChapt4() {
+          clearCommentary();
+          log("⌄ ");
+          log("Almost gave up Again...");
+          showChoices([
+            { label: "tryAgain()", handler: tryAgainAfterProcrastinate4 }
+          ]);
+      }
+
+      function tryAgainAfterProcrastinate4() {
+          clearCommentary();
+          showChoices([
+          { label: "procrastinate()", handler: procrastinateChapt4, disabled:true},
+          { label: "workingWithPurpose()", handler: workingWithPurpose },
+          ]);
+      }
+
+      function workingWithPurpose() {
+          clearCommentary();
+          log("⌄ ");
+          log("You kept going.");
+          setTimeout (() => {
+            showRecap();
+          }, 3000)
+         
+      }
+
+    }
+    }
+
+    //Bck-btn/menu and perfect stylying
+    function resetStory() {
+    location.reload();
+    }
+  
+    window.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("backBtn").style.display = "block";
+   });
+
+    function goBack() {
+      window.history.back(); // Go back to previous page 
+    }
+
+    function toggleMenu() {
+      const menu = document.getElementById("menu");
+      menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+    }
+
+    window.addEventListener("scroll", () => {
+    const header = document.querySelector("header");
+    if (window.scrollY > 10) {
+      header.style.backgroundColor = "#1e1e1e"; // darker
+    } else {
+      header.style.backgroundColor = "#272727"; // default
+    }
+    if (menu.style.display === "flex") {
+      menu.style.display = "none";
+    }
+   });
+
+   </script>
+  
+</body>
+</html>

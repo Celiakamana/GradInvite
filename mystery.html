@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mystery Page</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+    }
+        
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #272727;
+      color: #b67c8f;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    main {
+      flex: 1;
+      padding-top: 120px;
+      padding-bottom: 100px;
+    }
+
+    #countdown {
+      font-size: 2rem;
+      color: #ffffff;
+      margin-top: 20px;
+    }
+
+    #message {
+      font-size: 1.5rem;
+      color: #e5e5e5;
+      margin-top: 20px;
+    }
+
+    /* nav */
+    header {
+      position: fixed;
+      top: 0px;
+      left: 0;
+      right: 0;
+      background-color: 272727;
+      z-index: 5;
+      display: flex;
+      height: 90px;
+    }
+
+    .back-btn {
+      position: fixed;
+      top: 0px;
+      left: 0;
+      right: 0;
+      background-color: #c74772;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: none;
+      z-index: 4;
+    }
+
+    .burger {
+      position: fixed;
+      top: 50px;
+      right: 50%;
+      background-color: #c74772;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 50px;
+      z-index: 3;
+    }
+
+    .menu {
+      position: fixed;
+      top: 75px;
+      right: 50%;
+      background-color: #1e1e1e;
+      border: 2px solid #b67c8f;
+      border-radius: 10px;
+      padding: 10px;
+      display: none;
+      flex-direction: column;
+      z-index: 2;
+    }
+
+    .menu a {
+      color: white;
+      text-decoration: none;
+      margin: 5px 0;
+      display: block;
+      font-size: 0.9rem;
+    }
+
+    .menu a:hover {
+      color: #b67c8f;
+    }
+
+    footer {
+			background: #1e1e1e;
+			color: #fff;
+			text-align: center;
+      width:100%;
+		}
+    footer p {
+    margin: 4px 0; 
+    font-size: 0.85rem; 
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
+      #countdown {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <!-- Burger Menu -->
+    <button class="burger" onclick="toggleMenu()">☰</button>
+    <div class="menu" id="menu">
+      <a href="index.html">🏠 Home</a>
+      <a href="party.html">Party Info/RSVP</a>
+      <a href="journey.html">Undergrad Journey</a>
+    </div>
+
+    <!-- Back Button -->
+    <button class="back-btn" id="backBtn" onclick="goBack()">⬅ Back</button>
+  </header>
+
+  <main>
+    <h1>🔒 Mystery Page</h1>
+    <div id="countdown">Loading countdown...</div>
+    <div id="message"></div>
+  </main>
+<!-- Footer -->
+  <footer>
+    <div class="footercontainer">
+      <p>&copy; 2025 celiakamana.com | All rights reserved.</p>
+    </div>
+  </footer>
+  <script>
+    
+    window.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("backBtn").style.display = "block";
+    });
+
+    function goBack() {
+      window.history.back();
+    }
+
+    function toggleMenu() {
+      const menu = document.getElementById("menu");
+      menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+    }
+
+    window.addEventListener("scroll", () => {
+    const header = document.querySelector("header");
+    if (window.scrollY > 10) {
+      header.style.backgroundColor = "#1e1e1e"; // darker
+    } else {
+      header.style.backgroundColor = "#272727"; // default
+    }
+     
+    if (menu.style.display === "flex") {
+      menu.style.display = "none";
+    }
+    });
+
+    // Countdown
+    const countdownElement = document.getElementById("countdown");
+    const messageElement = document.getElementById("message");
+    const targetDate = new Date("May 4, 2025 00:00:00").getTime();
+
+    const updateCountdown = setInterval(() => {
+      const now = new Date().getTime();
+      const timeLeft = targetDate - now;
+
+      if (timeLeft <= 0) {
+        clearInterval(updateCountdown);
+        countdownElement.textContent = "";
+        messageElement.textContent = "🎉 The Mystery is Unlocked! 🎉";
+        return;
+      }
+
+      const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+      countdownElement.textContent = `Mystery unlocks in: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }, 1000);
+  </script>
+</body>
+</html>
