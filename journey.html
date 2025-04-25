@@ -5,18 +5,21 @@
   <title>Undergrad Journey</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
-    body {
-      margin: 0;
-      background-color: #b67c8f;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: #ffffff;
-      background-color: #272727;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-    }
 
+    html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    }
+        
+    body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #272727;
+    color: white;
+    text-align: center;
+    }
+        
     .container {
       padding: 40px 20px;
       max-width: 700px;
@@ -28,7 +31,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
+      flex: 1;
       text-align: center;
     }
 
@@ -38,6 +41,7 @@
       font-size: 1.1rem;
       color: #ffffff;
       margin-bottom: 30px;
+      margin-top: 30px;
     }
 
     h1{
@@ -47,6 +51,10 @@
     }
 
     main{
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       margin-top: 30px;
     }
     
@@ -56,10 +64,12 @@
       border-radius: 10px;
       padding: 20px;
       height: 250px;
+      width: 370px;
+      margin:0 auto;
       text-align: left;
       overflow-y: auto;
       margin-bottom: 20px;
-      display: none;
+      display:none;
     }
 
     .choices {
@@ -165,13 +175,14 @@
       justify-content: center;
       z-index: 1;
       text-align: center;
-      padding: 20px;
+      padding: 10px;
     }
 
     #recapOverlay video, #recapOverlay img {
-      max-width: 90%;
-      max-height: 70vh;
+      max-width: 100%;
+      max-height: 90vh;
       border-radius: 10px;
+      margin-top: 20px;
       margin-bottom: 20px;
     }
 
@@ -185,7 +196,9 @@
       cursor: pointer;
       position: absolute;
       bottom: 20px;
-      right: 20px;
+      left: 0;
+      right: 0;
+      width:100%;
     }
 
     footer {
@@ -194,9 +207,10 @@
 			text-align: center;
       width:100%;
 		}
-    footer p {
+    footer p, a{
     margin: 4px 0; 
-    font-size: 0.85rem; 
+    font-size: 0.85rem;
+    color: #fff; 
     }
 
     @media (max-width: 600px) {
@@ -224,7 +238,7 @@
       </div>
 
      <!-- Back Button -->
-     <button class="back-btn" id="backBtn" onclick="goBack()">⬅ Back</button>
+     <button class="back-btn" id="backBtn" onclick="goBack()">Back</button>
    </header>
    
    <main>
@@ -232,15 +246,22 @@
       <!-- INTRO ONLY -->
       <div class="introBlock" id="introBlock">
         <div class="introText">
-          A wise woman raised me on the principle of <strong>"You can do anything."</strong><br>
-          This bachelor taught me that each function unlocks the next.<br>
-          Don’t forget to <code>tryAgain()</code> when <code>fail()</code>.<br>
+          A wise woman raised me on the principle of <br>
+          <strong>"You can do anything, if you really want to!"</strong><br>
+          So, <strong>I Listened</strong> lol, I internalized those words, and now
+          my ultimate goal in life is to never give away my power to
+          anything that could stop me from doing anything I really want to!<br>
+          <br>
+          With that being said, I started my journey to earn my bachelor without a clue on how I was 
+          going to make it all work...<br>
           Let me take you on my undergrad journey...
+          <br><br>
+          <code>Hint:</code>There are no right or wrong paths! Don’t forget to <code>tryAgain()</code> when <code>fail()</code>.<br>
         </div>
        <button onclick="startJourney()">Start()</button>
       </div>
       <!-- chapters -->
-      <h1 id="chapter1Header">Chapter 1: Just a Girl in a Big World</h1>
+      <h1 id="chapter1Header">Chapter 1: Just a Girl in a Big Foreign Land</h1>
       <div class="terminal" id="terminal1"></div>
       <div class="choices" id="choices1"></div>
 
@@ -252,7 +273,7 @@
       <div class="terminal" id="terminal3"></div>
       <div class="choices" id="choices3"></div>
 
-      <h1 id="chapter4Header">Chapter 4: End of the Tunnel</h1>
+      <h1 id="chapter4Header">Chapter 4: Final Destination</h1>
       <div class="terminal" id="terminal4"></div>
       <div class="choices" id="choices4"></div>
 
@@ -264,7 +285,7 @@
 
    </main>
    <footer>
-      <p>&copy; 2025 celiakamana.com | All rights reserved.</p>
+    <p>&copy; 2025 <a href="https://celiakamana.com" target="_blank"> Celia Kamana</a> | All rights reserved.</p>
    </footer>
    <script>
 
@@ -275,11 +296,13 @@
     const chapterProgress = { 1: [], 2: [], 3: [], 4: [] };
 
     const chapterIntro = {
-      1: ["> bootSequence(\"newbie\")", "> \"You will never be anything in this country without me...\""],
+      1: ["> bootSequence(\"newbie\")", "> \"You will never be anything here without me...\""],
       2: ["> bootSequence(\"Second Beginning\")", "> New state, new program..."],
       3: ["> bootSequence(\"Navigating IT\")", "> New major, nothing's easier..."],
-      4: ["> bootSequence(\"Final Chapter\")", "> Blessings at every corner..."],
-      finale: ["My story is far from done...", "This is nothing but the first leg!"]
+      4: ["> bootSequence(\"Final Chapter\")", "> Capstone nightmare..."],
+      finale: [" Remarks", "The Biggest lesson this past four years have tough me is that every action on a function unlocks the next lol,",
+      "In regular english, if one wants to succeed, they have to be willing to start! Start without knowing everything, start scared, start broke,...as long as you start! And if you fail along the way, try again, until you get everything you really want to :)",
+      "My story is far from over...I have started my journey and this is nothing but the first leg!"]
     };
 
     function startJourney() {
@@ -317,7 +340,9 @@
       for (let i = lines.length - 1; i >= 0; i--) {
         if (!lines[i].textContent.startsWith(">")) {
           lines[i].remove();
-        } else {
+        } 
+        else
+        {
           break;
         }
       }
@@ -349,17 +374,16 @@
             b.classList.add("clicked");
             btn.handler();
           }
-          document.getElementById("menu").style.display = "none";
         };
         choicesDiv.appendChild(b);
       });
     }
 
     const recapVideos = {
-      1: "recap1.mp4",
-      2: "recap2.mp4",
-      3: "recap3.mp4",
-      4: "recap4.mp4"
+      1: "img/recap1.mov",
+      2: "img/recap2.mov",
+      3: "img/recap3.mov",
+      4: "img/recap4.mov"
     };
 
     function showRecap() {
@@ -370,18 +394,24 @@
       video.src = recapVideos[currentChapter];
       overlay.style.display = "block";
       skipBtn.style.display = "block";
-
-      setTimeout(() => {skipBtn.style.display = "block"}, 3000);
+      setTimeout(() => {skipBtn.style.display = "block"}, 30000); //30sec
+      video.onended = () => {
+        endRecap(); 
+      };
     }
 
     function endRecap() {
+      const video = document.getElementById("recapVideo");
+      video.pause();          
+      video.currentTime = 0;   
       document.getElementById("recapOverlay").style.display = "none";
       document.getElementById("skipButton").style.display = "none";
 
       if (currentChapter < 4) {
+        clearCommentary();
         log("> ontotheNextChapter()");
         showChoices([
-          { label: `▶ Continue to Chapter ${currentChapter + 1}`, 
+          { label: `Continue to Chapter ${currentChapter + 1}`, 
             handler: () => startChapter(currentChapter + 1) 
           }
         ]);
@@ -423,6 +453,35 @@
       }
     }
 
+    let recapTimeout = null;
+    function showRecapOptions() {
+      const choicesDiv = document.getElementById(`choices${currentChapter}`);
+      choicesDiv.innerHTML = "";
+
+      const watchBtn = document.createElement("button");
+      watchBtn.textContent = "▶ Watch Recap";
+      watchBtn.onclick = () => {
+        clearTimeout(recapTimeout);
+        const video = document.getElementById("recapVideo");
+        video.muted = false;
+        showRecap();
+      };
+
+      const skipBtn = document.createElement("button");
+      skipBtn.textContent = "Skip Recap";
+      skipBtn.onclick = () => {
+        clearTimeout(recapTimeout); 
+        endRecap();
+      };
+
+      choicesDiv.appendChild(watchBtn);
+      choicesDiv.appendChild(skipBtn);
+
+      recapTimeout = setTimeout(() => {
+        showRecap();
+      }, 120000); // 2 minutes
+    }
+
     //Chapters
     function renderChapter(chapterNum) {
     if (chapterNum === 1) {
@@ -437,7 +496,8 @@
 
       function believeThisStatement() {
           log("⌄ ");
-          log("Internalized doubt.");
+          log("I was once told these words, and I believed it for a brief moment. At the time, I remember feeling corned, melancholic, alone and clueless.");
+          log("But like I said, I was raised by a wise woman, having her in my corner helped me challenge this perception. So, tried again... and defied the statament! ");
           showChoices([
             { label: "tryAgain()", handler: backToStart }
           ]);
@@ -453,17 +513,22 @@
 
       function defyThisStatement() {
           log("⌄ ");
-          log("You chose to rise.");
+          log("That's right, I made a promise to myself that the person who told me this statement was going to watch me become EVERYTHING!");
+          log("But Rome is not built in a day chileee, it was really hard in the beginning! I remember being scared..scared because I didnt know where to start, scared to fail, scared because my goals felt too big for little ol me. But I was determined to see them through.");
+          log("So, I made the first leap, I enrolled in a community college, with $20.00 to my name, no tuition, no instructional material and no way to commute to school!");
+          log("I wont lie, I started to wonder whether I should...");
           showChoices([
             { label: "maybeGiveUp()", handler: maybeGiveUp },
-            { label: "doItAnyway()", handler: doItAnyway }
+            { label: "keepGoingAnyway()", handler: doItAnyway }
           ]);
         }
 
       function maybeGiveUp() {
           clearCommentary();
           log("⌄ ");
-          log("Almost gave up...");
+          log("I actually did - for brief moment! During Covid, towards the end of my freshman year as a General Engineering student, things started to look hopeless, so at the end of the first year, I dropped out for a year!");
+          log("I ended up going back to Rwanda, and this trip did wonders for me, I came back more determined than never before that I was going to see through what I had started.");
+          log("So, despite the fact that at the time I could not see a way through, I decided to beleive in me - I am talking about full blown delusion, so I picked myself up and tried again...and kept going anyway");
           showChoices([
             { label: "tryAgain()", handler: tryAgainAfterMaybe }
           ]);
@@ -473,17 +538,18 @@
           clearCommentary();
           showChoices([
             { label: "maybeGiveUp()", handler: maybeGiveUp, disabled: true },
-            { label: "doItAnyway()", handler: doItAnyway }
+            { label: "keepGoingAnyway()", handler: doItAnyway }
           ]);
       }
 
       function doItAnyway() {
           clearCommentary();
           log("⌄ ");
-          log("You kept going.");
-          setTimeout (() => {
-            showRecap();
-          }, 3000)  
+          log("Sure did!! Even when nothing made sense, I still made it my mission to get everything I've ever wanted.");
+          log("So despite the uncertainities, For my second year in undergrad, I enrolled at Purdue University Global as a sophomore in the Aviation Program and I was going to pursue my bachelor in Professional flight!");
+          log("So, I packed my little belongings, grabbed my little savings and moved to a new state full of new unknowns, and chilee - I've got stories for days...")
+          log("But first lets watch a quick recap of my freshman year in undergrad!")
+          showRecapOptions(); 
       }
      
     }
@@ -500,7 +566,11 @@
 
       function FindPlaceFirst() {
           log("⌄ ");
-          log("Didnt do that.. doubt.");
+          log("Well I did and I didn't. You see I had two options, go in the ridiculously high priced school board apartments or find a place that is affordable. I was moving in a city where I practically knew nobody, finding an affordable place was not an easy feat!");
+          log("So what did I do I choose to book a room in stranger's house on Airbnb for a month and give myself time to properly look for a place - or so was the plan!");
+          log("But this new program was challenging and required a lot of my time and a lot of resources - that I did not have; But I was so determnined to make it work, that I ended up working two full time jobs and going to school fulltime at the same time.");
+          log("I was always tired, it felt like I was constantly working, and ofcourse naturally, I ended up not getting any time to look for a new place. My intial Airbnb rental days were quickly comming to an end and I still hadn't found stable place to stay at.");
+          log("So when the month came to an end, I decided to try again this new relocating thing.. but this time just wing it..");
           showChoices([
             { label: "tryAgain()", handler: backToStart2 }
           ]);
@@ -516,17 +586,21 @@
 
       function justWingIt() {
           log("⌄ ");
-          log("Thats right...");
+          log("Thats right, now I was completly flying blind lol. Exhausted from my two jobs and going to school full time, it wasn't like I was going to get anytime to spend in a house anyway, so I played a dangerous hand...Essentially, I started living a car-dwelling lifestyle (shuushh..don't tell my Mom). I remember not having a place to stay at for two week, I would go to planet fitness, use their showers, then go school, then in the afternoon go to my first job and then my second job which was an overnight shift that ended 4'oclock, I would then sleep for a couple hours in the car, then repeat. You see I was chasing after my dreams, so it all felt - or should I say - was worth it.");
+          log("After those two weeks a landlord that I had reached out to, end up having me as their tenant in their three bedroom house; I now had a safe place to stay at and two new roomates/friends in the new city.");
+          log("Anyway, I kept working hard, took my first SOLO flight whoohoo! and ofcourse from there, the program became more and more expensive, additionally I had new responsabilities(rent and 'em lol). Eventually the load became too much to handle on my own, I was now faced with two choices:");
           showChoices([
             { label: "quitUniversity()", handler: quitUniversity },
-            { label: "switchToIt()", handler: switchToIt }
+            { label: "switchUnderGradProgram()", handler: switchToIt }
           ]);
         }
 
       function quitUniversity() {
           clearCommentary();
           log("⌄ ");
-          log("Almost gave up Again...");
+          log("The thought crossed my mind - if I am being honest. For me it was became a pilot or nothing at all.");
+          log("But ofcourse you reading this, can already tell it is not the path I choose. I am tredmendously gratefull for the mentors I met along the path I was on, they tought me so much and broadened my perspective on different ways to get to what I wanted to acheive. With that being said, I was motivated more than ever to become a college graduate - one way or another, I was going this bachelor degree... ")
+          log("So, I gathered my brains, and decided to change to new affordable program and try again for this bachelor degree in a diffrent program..");
           showChoices([
             { label: "tryAgain()", handler: tryAgainAfterQuitThoughts2 }
           ]);
@@ -536,17 +610,19 @@
           clearCommentary();
           showChoices([
             { label: "quitUniversity()", handler: quitUniversity, disabled: true },
-            { label: "switchToIt", handler: switchToIt }
+            { label: "switchUndergradProgram()", handler: switchToIt }
           ]);
       }
 
       function switchToIt() {
           clearCommentary();
           log("⌄ ");
-          log("You kept going.");
-          setTimeout (() => {
-            showRecap();
-          }, 3000)
+          log("Yep, in Dj Khalid voice - ANOTHER ONE,lol!");
+          log("During my second year and all throught my flight training, I got to meet exceptionally smart folks and learned more about the ins and outs of the Aviation industry, one of the re-occuring advice I kept hearing was Part 61. In brief, part 61 is another way to aquire your aviation licenses.");
+          log("Eventhough this path can be more affordable, it still required some kind of funding, so I decided to study a skill that I could leverage in the next 2-3 years to fund my long term goal.");
+          log("So here we are now! I started my Junior year as candidate for the Information Technology program, and boy ohh boy...let me tell you all about it!")
+          log("But first let's watch a quick recap of my sophmore year in undergrad!");
+          showRecapOptions(); 
       }
         
     }
@@ -555,7 +631,6 @@
       // Initial path
       showChoices([
         {label: "procrastinate()", handler: ()=> procrastinate()},
-
         { label: "lockIn()", handler: ()=> lockIn()}
       ]);
 
@@ -564,7 +639,9 @@
 
       function procrastinate() {
           log("⌄ ");
-          log("Did do that.. yep.");
+          log("Yep, you see I like technology but I wouldnt say I was passionate about it at the time, so I tried to procastinate and quickly learned that was a bad idea.");
+          log("My grades started to take a small hit and recieved a call from the counselor asking if everything was okay? I like to call that call a quick wake up call, I hadn't come that far just come that far - you know! lol!");
+          log("So I rearraged my brains and snapped out of this behavior and tried again...and locked in! ");
           showChoices([
             { label: "tryAgain()", handler: backToStart3 }
           ]);
@@ -580,17 +657,18 @@
 
       function lockIn() {
           log("⌄ ");
-          log("Thats right...");
+          log("That's right...I mean I kind off had to, programming was not the walk in the park I was expecting, Iterations had me running in loops - literally and figuratively!");
+          log("I started to think should I...")
           showChoices([
-          { label: "thoughtsOFQuitting()", handler: thoughtsOFQuitting },
-          { label: "keepAtIt()", handler: keepAtIt },
+          { label: "quit()", handler: thoughtsOFQuitting },
+          { label: "keepGoing()", handler: keepAtIt },
           ]);
         }
 
       function thoughtsOFQuitting() {
           clearCommentary();
           log("⌄ ");
-          log("Almost gave up Again...");
+          log("Nahhhh, I was locked in! Lets try again but this time the only option is to keep going!");
           showChoices([
             { label: "tryAgain()", handler: tryAgainAfterQuitThoughts3 }
           ]);
@@ -599,19 +677,18 @@
       function tryAgainAfterQuitThoughts3() {
           clearCommentary();
           showChoices([
-          { label: "thoughtsOFQuitting()", handler: thoughtsOFQuitting, disabled:true},
-          { label: "keepAtIt()", handler: keepAtIt },
+          { label: "quit()", handler: thoughtsOFQuitting, disabled:true},
+          { label: "keepGoing()", handler: keepAtIt },
           ]);
       }
 
       function keepAtIt() {
           clearCommentary();
           log("⌄ ");
-          log("You kept going.");
-          setTimeout (() => {
-            showRecap();
-          }, 3000)
-         
+          log("Damn right, I started to think I should keep at it and go even harder. You see I love a challenge, the more challenging it became the more I wanted to conquer it.");
+          log("Eventually, I started to become passionate about this field and enjoyed it! That was until the capstone nightmare...");
+          log("Let's first watch a recap of my Junior year in undergrad!");
+          showRecapOptions();  
       }
 
     }
@@ -628,9 +705,10 @@
 
       function becomeHopeless() {
           log("⌄ ");
-          log("Did do that.. yep.");
+          log("My capstone project made me sob at some point, no joking! So much so, that I thought of backing out the last year, can you imagine!");
+          log("But I was too far in this time, there was no going back, I had to make it work, so I tried again - yet another time, and put my faith in God... ");
           showChoices([
-            { label: "tryAgain()", handler: backToStart4 }
+            { label: "triedAgain()", handler: backToStart4 }
           ]);
       }
 
@@ -644,17 +722,19 @@
 
       function beleieveInGodsPlan() {
           log("⌄ ");
-          log("Thats right...");
+          log("See, I choose to hold steady in my savior, after all I had seen him throughout my journey, why would he forsake me at the end? Turns out this was the right choice, because in the last semester a miracle took place!");
+          log("For starters I completed the project on time, then my professor liked it and actually helped me refine the project, which I was then able to pitch to an organization - but it did not go through as expected.");
+          log(" At that point in time, one would say I had two choices, to..");
           showChoices([
-          { label: "procrastinate()", handler: procrastinateChapt4 },
-          { label: "workingWithPurpose()", handler: workingWithPurpose },
+          { label: "NowChill()", handler: procrastinateChapt4 },
+          { label: "NowWorkWithPurpose()", handler: workingWithPurpose },
           ]);
         }
 
       function procrastinateChapt4() {
           clearCommentary();
           log("⌄ ");
-          log("Almost gave up Again...");
+          log("I could've, but I said no thank you, I am going to try again, and choose the other option...");
           showChoices([
             { label: "tryAgain()", handler: tryAgainAfterProcrastinate4 }
           ]);
@@ -663,21 +743,18 @@
       function tryAgainAfterProcrastinate4() {
           clearCommentary();
           showChoices([
-          { label: "procrastinate()", handler: procrastinateChapt4, disabled:true},
-          { label: "workingWithPurpose()", handler: workingWithPurpose },
+          { label: "NowChill()", handler: procrastinateChapt4, disabled:true},
+          { label: "NowWorkWithPurpose()", handler: workingWithPurpose },
           ]);
       }
 
       function workingWithPurpose() {
           clearCommentary();
           log("⌄ ");
-          log("You kept going.");
-          setTimeout (() => {
-            showRecap();
-          }, 3000)
-         
+          log("That's right, I will keep working on both my aviation carreer and my IT carreer and I have hope and faith that both will pay off eventually. But for now I will sign off on high note as the freshest Undergrad graduate on the block lol xoxo");
+          log("This chapter recap is really just going to my capstone, which took me hours and sleepless nights. But I packaged in a fancy edit sighh!");
+          showRecapOptions();  
       }
-
     }
     }
 

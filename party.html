@@ -5,13 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>PartyInfo</title>
   <style>
-    body {
-      height:100vh;
+
+    html, body {
+      height: 100%;
       margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #272727;
-      color: #c74772;
-      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+    }
+        
+    body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #272727;
+    color: #b67c8f;
+    text-align: center;
+    line-height: 1.6;
     }
 
   
@@ -147,15 +154,20 @@
       color: #b67c8f;
     }
 
+    .placeholder-option {
+      color: black;
+    }
+
     footer {
 			background: #1e1e1e;
 			color: #fff;
 			text-align: center;
       width:100%;
 		}
-    footer p {
+    footer p,a {
     margin: 4px 0; 
     font-size: 0.85rem; 
+    color: #fff;
     }
 
     @media (max-width: 600px) {
@@ -178,7 +190,7 @@
       </div>
  
       <!-- Back Button -->
-      <button class="back-btn" id="backBtn" onclick="goBack()">⬅ Back</button>
+      <button class="back-btn" id="backBtn" onclick="goBack()">Back</button>
   </header>
   <main>
     <div class="container">
@@ -205,13 +217,13 @@
       </div>
   
       <h2>RSVP</h2>
-      <form action="https://formspree.io/f/xldbeoyr" method="POST">
+      <form id= "rsvpForm" action="https://formspree.io/f/xldbeoyr" method="POST">
         <label for="name">Your Name</label>
         <input type="text" id="name" name="name" required />
   
         <label for="attendance">Will you attend?</label>
         <select id="attendance" name="attendance" required>
-          <option value="">-- Please choose one --</option>
+          <option value="" class="placeholder-option">-- Please choose one --</option>
           <option value="Yes, I will be there">Yes, I will be there :)</option>
           <option value="No, Can't make it">No, Can't make it :(</option>
         </select>
@@ -221,16 +233,45 @@
   
         <button type="submit">Submit RSVP</button>
       </form>
+      <p id="confirmationMsg" style="color: green; font-weight: bold; font-size: 20px; margin-top: 15px;"></p>
     </div>
   </main>
   <footer>
-    <p>&copy; 2025 celiakamana.com | All rights reserved.</p>
+    <p>&copy; 2025 <a href="https://celiakamana.com" target="_blank"> Celia Kamana</a> | All rights reserved.</p>
   </footer>
   
   <script>
-     window.addEventListener("DOMContentLoaded", () => {
-    document.getElementById("backBtn").style.display = "block";
-   });
+     //form answer
+    document.getElementById("rsvpForm").addEventListener("submit", function(event) {
+      event.preventDefault(); 
+
+      const form = event.target;
+      const formData = new FormData(form);
+
+      fetch("https://formspree.io/f/xldbeoyr", {
+        method: "POST",
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+        })
+        .then(response => {
+          if (response.ok) {
+            document.getElementById("confirmationMsg").textContent = "🎉 RSVP received! See you soon!";
+            form.reset(); 
+          } 
+          else {
+            document.getElementById("confirmationMsg").textContent = "Oops, something went wrong. Try again!";
+          }
+        })
+        .catch(error => {
+          document.getElementById("confirmationMsg").textContent = "Error submitting the form.";
+        });
+    });
+    
+    window.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("backBtn").style.display = "block";
+    });
 
     function goBack() {
       window.history.back(); // Go back to previous page 
