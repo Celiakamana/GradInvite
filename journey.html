@@ -21,8 +21,8 @@
     }
         
     .container {
-      padding: 40px 20px;
-      max-width: 700px;
+      padding: 20px 20px;
+      max-width: 480px;
       margin: auto;
     }
 
@@ -63,8 +63,8 @@
       border: 2px solid #b67c8f;
       border-radius: 10px;
       padding: 20px;
-      height: 250px;
-      width: 360px;
+      height: 200px;
+      width: 300px;
       margin:0 auto;
       text-align: left;
       overflow-y: auto;
@@ -282,7 +282,7 @@
       <video autoplay muted id="recapVideo" ></video>
       <button id="skipButton" onclick="endRecap()">Skip Recap ▶</button>
      </div>
-
+    </div>
    </main>
    <footer>
     <p>&copy; 2025 <a href="https://celiakamana.com" target="_blank"> Celia Kamana</a> | All rights reserved.</p>
@@ -315,7 +315,12 @@
       const p = document.createElement("div");
       p.textContent = text;
       terminal.appendChild(p);
-      
+      if (terminal.scrollHeight > terminal.clientHeight * 2) {
+        terminal.scrollTop = terminal.scrollHeight;
+      } 
+      else {
+        terminal.scrollTop = 0;
+      }
     }
 
     function startChapter(chapterNum) {
@@ -752,7 +757,7 @@
           clearCommentary();
           log("⌄ ");
           log("That's right, I will keep working on both my aviation carreer and my IT carreer and I have hope and faith that both will pay off eventually. But for now I will sign off on high note as the freshest Undergrad graduate on the block lol xoxo");
-          log("This chapter recap is really just going to my capstone, which took me hours and sleepless nights. But I packaged in a fancy edit sighh!");
+          log("This chapter recap is really just going to my capstone, which took me hours and sleepless nights. But I packaged it in a fancy edit sighh!");
           showRecapOptions();  
       }
     }
