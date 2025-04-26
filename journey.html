@@ -315,12 +315,8 @@
       const p = document.createElement("div");
       p.textContent = text;
       terminal.appendChild(p);
-      if (terminal.scrollHeight > terminal.clientHeight * 2) {
-        terminal.scrollTop = terminal.scrollHeight;
-      } 
-      else {
-        terminal.scrollTop = 0;
-      }
+      terminal.scrollTop = 0;
+      
     }
 
     function startChapter(chapterNum) {
